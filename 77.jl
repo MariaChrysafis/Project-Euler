@@ -18,9 +18,6 @@ function f(n)
                 k += j
             end
         end
-        for j in 1:n
-            # println([i, j, dp[i, j]])
-        end
         if dp[i, i + 1] >= 5000
             return i
         end
