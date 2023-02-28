@@ -1,4 +1,3 @@
-[collapse=Julia]
 function f(n)
     cur = 1
     prev = 1
@@ -17,4 +16,3 @@ function f(n)
     ans
 end
 println(f(4000000))
-[/collapse]
