@@ -1,8 +1,7 @@
 using Primes
 function fibonacci(n)
-   F = BigInt[1 1; 1 0]
-   Fn = F ^ n
-   Fn[2, 1]
+   fib = BigInt[1 1; 1 0]^n
+   return fib[2, 1]
 end
 function f(dig)
     l = 0
