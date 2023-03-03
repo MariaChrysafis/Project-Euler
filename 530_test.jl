@@ -28,17 +28,16 @@ function F_fast(N::Int)
     for i in 1:N
         arr[1] += div(N, i)
     end
+
     for x in 2:gamma
-        n = x
-        for n in 1:N
-            for d in 1:n
-                if n % d == 0 && div(n, d) % x == 0 && d % x == 0
-                    arr[x] += 1
-                end
-            end
+        n = div(N, x)
+        for val in 1:div(N, x * x)
+            arr[x] += div(div(n, x), val)
         end
     end
+
     println(arr)
+
     new_arr::Array{Int} = zeros(gamma + 1)
     for i in 1:gamma
         d = i
