@@ -1,3 +1,3 @@
 # Project Euler
 
-Project Euler, but in Julia programming language!
+Project Euler, but in [Julia programming language](https://julialang.org/)!
