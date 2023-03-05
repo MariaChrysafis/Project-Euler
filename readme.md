@@ -1,3 +1,3 @@
 # Project Euler
 
-Solving Project Euler in the [Julia programming language](https://julialang.org/)!
+Solving Project Euler using Julia, C++, Python, Rust, Java, Kotlin, and more!
