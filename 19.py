@@ -8,7 +8,6 @@ ans = 0
 while True :
     if left.weekday() == 6 and left.day == 1 :
         ans += 1
-        print(left)
     if left == right :
         break
     left += timedelta(days=1)
