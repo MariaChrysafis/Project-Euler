@@ -1,3 +1,4 @@
+
 import itertools
 
 M = pow(10, 13)
@@ -5,7 +6,6 @@ fib = [1, 2]
 for i in itertools.count(start=2):
     fib.append(fib[len(fib) - 1] + fib[len(fib) - 2])
     if fib[i] > M:
-        K = i + 1
         break
 
 
