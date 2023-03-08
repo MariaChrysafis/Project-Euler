@@ -4,10 +4,6 @@ iterator `..`*[T](a: T, b: T): T =
     yield res
     inc res
 
-type
-  Matrix[W, H: static[int]] =
-    array[1..W, array[1..H, int]]
-
 import sets
 
 proc f(val: int): int = 
