@@ -27,11 +27,10 @@ proc minus (a:clong, b:clong):int =
     return (a mod modulo - b mod modulo + modulo) mod modulo
 const mx = 12345678
 
-var res: array[mx + 1, clong]
-res[1] = 1
+var res = 1
 for i in 2..mx :
     if i mod 2 == 0 :
-        res[i] = minus(plus(res[i - 1], binPow(2, i)), 1)
+        res = minus(plus(res, binPow(2, i)), 1)
     else :
-        res[i] = plus(minus(plus(mult(res[i - 1], 2), binPow(2, i - 1 + ((i - 1) div 2))), mult(divide((binPow(2, i - 1) - 1), 3), 2)), i div 2)
-echo plus(res[len(res) - 1], binPow(2, mx))
+        res = plus(minus(plus(mult(res, 2), binPow(2, i - 1 + ((i - 1) div 2))), mult(divide((binPow(2, i - 1) - 1), 3), 2)), i div 2)
+echo plus(res, binPow(2, mx))
