@@ -1,10 +1,3 @@
-# Sequence for which Eric wins
-import std/math
-import std/bitops    
-import strformat
-import system    
-
-
 iterator `..`*[T](a: T, b: T): T =
   var res: T = a
   while res <= b:
