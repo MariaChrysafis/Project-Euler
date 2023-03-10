@@ -5,7 +5,6 @@ import std/options
 import std/math
 import strutils
 
-
 iterator `..`*[T](a: T, b: T): T =
   var res: T = a
   while res <= b:
