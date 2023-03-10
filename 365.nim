@@ -39,19 +39,20 @@ proc get_digits (n:int64, p:int):seq[int64] =
         vec.add(m mod p)
         m = (m - m mod p) div p
     return vec
+
 const mx = 5001
 var combo: array[mx, array[mx, BigInt]]
+
 proc bigint_to_int(x:BigInt) : int64 =
     let gamma = toInt[int64](x)
     return gamma.get()
-proc eval (n: int64, m: int64, p: int): int64 = # evaluate C(n, m) (mod p) using combinatorics class
+
+proc eval (n: int64, m: int64, p: int): int64 = # evaluate C(n, m) (mod p) using Lucas' theorem
     var ans: int64 = 1
     let left = get_digits(n, p)
     let right = get_digits(m, p)
     for i in 0..min(len(left), len(right)) - 1 :
-        var left_val: int64 = left[i]
-        var right_val: int64 = right[i]
-        ans *= bigint_to_int(combo[left_val][right_val] mod initBigInt(p))
+        ans *= bigint_to_int(combo[left[i]][right[i]] mod initBigInt(p))
         ans = ans mod p
     return ans
 
@@ -86,9 +87,6 @@ var ans = 0
 for p in 0..len(a) - 1:
     for q in p + 1..len(a) - 1:
         for r in q + 1..len(a) - 1:
-            let p1 = b[p]
-            let q1 = b[q]
-            let r1 = b[r]
             let val = chineseRemainder([a[p], a[q], a[r]], [b[p], b[q], b[r]])
             ans += val
 echo ans
