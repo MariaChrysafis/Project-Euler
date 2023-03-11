@@ -15,7 +15,11 @@ iterator `..`*[T](a: T, b: T): T =
   while res <= b:
     yield res
     inc res
-
+iterator `...`*[T](a: T, b: T): T =
+  var res: T = a
+  while res >= b:
+    yield res
+    dec res
 # Idea:
 # Let MX = 10^12. Suppose that we are trying to find S(MX)
 # Let g(x, p) denote the number of numbers n <= MX/x such that all prime factors of n are >= p
@@ -35,26 +39,21 @@ for i in 2..len(is_prime) - 1 :
       is_prime[j] = false
       j += i
     primes.add(i)
-var g: array[MAX + 1, seq[int]]
-for x in 0..len(g) - 1 :
-  g[x] = newSeq[int](len(primes))
-
-for p in 0..len(g[0]) - 1 :
-  for x in 1..len(g) - 1 :
-    if p == 0 :
-      g[x][p] = (MAX div x) - ((MAX div x) div primes[p])
-    else :
-      if x * primes[p] > MAX :
-        g[x][p] = g[x][p - 1]
-      else :
-        g[x][p] = g[x][p - 1] - g[x * primes[p]][p - 1]
+var cur: array[MAX + 1, int]
+var prev: array[MAX + 1, int]
 var ans = 0
 for p in 0..len(primes) - 1 :
+  prev = cur
+  for x in MAX...1 :
+    if p == 0 :
+      cur[x] = (MAX div x) - ((MAX div x) div primes[p])
+    else :
+      if x * primes[p] > MAX :
+        cur[x] = prev[x]
+      else :
+        cur[x] = prev[x] - prev[x * primes[p]]
   if p != 0 :
-    ans += (g[1][p - 1] - g[1][p]) * primes[p]
+    ans += (prev[1] - cur[1]) * primes[p]
   else :
-    ans += g[1][p] * primes[p]
+    ans += cur[1] * primes[p]
 echo ans
-
-
-
