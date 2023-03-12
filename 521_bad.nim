@@ -51,26 +51,29 @@ var cur_sum: array[MAX + 1, int64]
 var prev: array[MAX + 1, int64]
 var prev_sum: array[MAX + 1, int64]
 var ans: int64 = 0
+var needed: seq[int64]
+for i in 1..sq :
+  needed.add(MAX div i)
+  needed.add(i)
+sort(needed)
+needed = deduplicate(needed)
+
 for p in 0..len(primes) - 1 :
   prev = cur
   prev_sum = cur_sum
   for x in MAX...1 :
     if p == 0 :
-      cur[x] = (MAX div x) - ((MAX div x) div primes[p])
-      var fl = MAX div x
+      cur[x] = x - (x div primes[p])
+      var fl = x
       let fl2 = (fl div 2) mod MOD
       fl = fl mod MOD
       cur_sum[x] = (((fl * (fl + 1)) div 2) mod MOD - ((fl2 * (fl2 + 1))) mod MOD + MOD) mod MOD
     else :
-      if x * primes[p] > len(cur) :
-        cur[x] = prev[x]
-        cur_sum[x] = prev_sum[x]
-      else :
-        cur[x] = sub(prev[x], prev[x * primes[p]])
-        cur_sum[x] = sub(prev_sum[x], mult(prev_sum[x * primes[p]], primes[p]))
+        cur[x] = sub(prev[x], prev[x div primes[p]])
+        cur_sum[x] = sub(prev_sum[x], mult(prev_sum[x div primes[p]], primes[p]))
   if p != 0 :
-    ans += mult(sub(prev[1], cur[1]), primes[p])
+    ans += mult(sub(prev[MAX], cur[MAX]), primes[p])
   else :
-    ans += mult(cur[1], primes[p])
-ans += cur_sum[1] - 1
+    ans += mult(cur[MAX], primes[p])
+ans += cur_sum[MAX] - 1
 echo ans
