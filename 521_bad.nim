@@ -6,6 +6,8 @@ import std/math
 import strutils
 import std/algorithm
 import std/sets
+import tables
+
 
 
 const MAX: int64 = 100
@@ -46,10 +48,10 @@ for i in 2..len(is_prime) - 1 :
       is_prime[j] = false
       j += i
     primes.add(i)
-var cur: array[MAX + 1, int64]
-var cur_sum: array[MAX + 1, int64]
-var prev: array[MAX + 1, int64]
-var prev_sum: array[MAX + 1, int64]
+var cur = initTable[int64, int64]()
+var cur_sum = initTable[int64, int64]()
+var prev = initTable[int64, int64]()
+var prev_sum = initTable[int64, int64]()
 var ans: int64 = 0
 var needed: seq[int64]
 for i in 1..sq :
@@ -57,11 +59,19 @@ for i in 1..sq :
   needed.add(i)
 sort(needed)
 needed = deduplicate(needed)
-
+for i in needed :
+  cur[i] = 0
+  cur_sum[i] = 0
+  prev[i] = 0
+  prev_sum[i] = 0
+cur[0] = 0
+cur_sum[0] = 0
+prev[0] = 0
+prev_sum[0] = 0
 for p in 0..len(primes) - 1 :
   prev = cur
   prev_sum = cur_sum
-  for x in MAX...1 :
+  for x in needed :
     if p == 0 :
       cur[x] = x - (x div primes[p])
       var fl = x
