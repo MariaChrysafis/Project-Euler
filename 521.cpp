@@ -52,7 +52,6 @@ int is_prime[sq + 1];
 
 vector<int64_t> primes;
 
-
 int64_t get (int64_t x) {
     if (x <= sq) return x;
     return MAX/x + sq;
@@ -113,7 +112,4 @@ int main () {
     cout << ans << '\n';
     ans += cur_sum[get(MAX)] - pref - 1;
     cout << ans;
-
 }
-
-
