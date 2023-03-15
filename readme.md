@@ -6,4 +6,4 @@ So far, I've used Julia, C++, Python, Nim, Kotlin, D, Haskell and Pari-GP to sol
 
 | Problem | C++ | Python | Nim | Julia | D | PARI/GP | Haskell |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| a | b | c | d | e | f | g | h |
+| [Problem #1: Multiples of 3 or 5](https://projecteuler.net/problem=1) | b | c | d | e | f | g | h |
