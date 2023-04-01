@@ -3,7 +3,6 @@ import random
 import math
 from collections import defaultdict
 from fractions import Fraction
-# from sympy import Symbol, cos
 def isprime (x) :
     for i in range(2, x) :
         if i * i > x :
@@ -15,11 +14,9 @@ class Solver :
     a = []
     s = defaultdict(lambda: 0)
     def __init__ (self, a) :
-        print(len(a))
         self.a = a
         self.s = defaultdict(lambda: 0)
         for i in range(0, (1 << len(a))) :
-            print(i)
             tot = Fraction(0, 1)
             for j in range(0, len(a)) :
                 if (i & (1 << j)) != 0 :
@@ -43,8 +40,6 @@ def okay (m) :
     for i in range(2, MX + 1) :
         if gcd(i, m) != 1 :
             pos.append(i)
-    if m == 1 :
-        print(pos)
     for i in range(1, (1 << len(pos))) :
         tot = []
         res = Fraction(0, 1)
@@ -54,9 +49,6 @@ def okay (m) :
                 res = reduce(res)
                 tot.append(pos[j])
         if gcd(res.denominator, m) == 1 :
-            if m == 11 :
-                print(res.numerator, res.denominator)
-                print(tot)
             return True
     return False
 
@@ -64,15 +56,12 @@ fine = [True] * (MX + 1)
 tot = [2, 3]
 for i in range(4, MX + 1) :
     if isprime(i) and not okay(i) :
-        print("NOT OKAY", i)
         for j in range(i, MX + 1, i) : 
             fine[j] = False
 pos = []
 for i in range(2, len(fine)) :
     if fine[i] :
         pos.append(i)
-print(pos)
-print(len(pos))
 
 s1 = Solver(pos[:len(pos)//2])
 b = pos[len(pos)//2:]
