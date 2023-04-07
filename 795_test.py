@@ -47,11 +47,11 @@ for g in range(1, MX + 1) :
         if g_sq % 2 == 0 :
             ans += g * mu[g1] * (right * (right + 1))//2 * (g * g1)//g_sq
             continue
+        if ((g * g1)//g_sq) % 2 == 0 :
+            continue
+        # ans -= g * mu[g1] * (1 + right)//2
+        # continue
         for i in range(1, right + 1) :
-            ls = (i * g * g1)//g_sq
-            if g_sq % 2 == 0 :
-                ans += g * mu[g1] * ls
-            else :
-                if ls % 2 == 1 :
-                    ans -= g * mu[g1]
+            if i % 2 == 1 :
+                ans -= g * mu[g1]
 print(ans)
