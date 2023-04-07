@@ -42,11 +42,8 @@ for i in range(2, MX + 1) :
 ans = 0
 for g in range(1, MX + 1) :
     for g1 in range(1, MX//g + 1) :
-        for i in range(1, MX + 1) :
-            if i % (g * g1) != 0 :
-                continue
-            for j in range(1, i + 1) :
-                if j % (math.isqrt((g * g1)//trace[g * g1]) * trace[g * g1]) != 0 :
-                    continue
-                ans += g * mu[g1] * pow(-1, j) 
+        g_sq = math.isqrt((g * g1)//trace[g * g1]) * trace[g * g1]
+        for i in range(1, (MX)//(g * g1) + 1) : 
+            for j in range(1, (i * g * g1)//g_sq + 1) :
+                ans += g * mu[g1] * pow(-1, j * g_sq) 
 print(ans)
