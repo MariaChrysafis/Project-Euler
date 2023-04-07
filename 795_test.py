@@ -3,7 +3,7 @@ def gcd (a, b) :
     if a == 0 or b == 0 :
         return max(a, b)
     return gcd(max(a, b) % min(a, b), min(a, b))
-MX = 1234
+MX = 12345678
 mu = [0] * (MX + 1)
 isprime = [True] * (MX + 1)
 trace = [1] * (MX + 1)
@@ -49,9 +49,7 @@ for g in range(1, MX + 1) :
             continue
         if ((g * g1)//g_sq) % 2 == 0 :
             continue
-        # ans -= g * mu[g1] * (1 + right)//2
-        # continue
-        for i in range(1, right + 1) :
-            if i % 2 == 1 :
-                ans -= g * mu[g1]
+        cntr = (right + 1)//2 * mu[g1] * g
+        ans -= cntr
 print(ans)
+
