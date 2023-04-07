@@ -16,7 +16,6 @@ for i in range(2, MX + 1) :
             isprime[j] = False
             mu[j] = 1 - mu[j]
             j += i
-print("DONE")
 for i in range(2, MX + 1) :
     if i * i > MX :
         break
@@ -25,6 +24,7 @@ for i in range(2, MX + 1) :
         while trace[j] % (i * i) == 0 :
             trace[j] = trace[j]//(i * i)
         j += i * i
+print(trace[12])
 for i in range(0, MX + 1) :
     if mu[i] == 0 :
         mu[i] = 1
@@ -41,12 +41,12 @@ for i in range(2, MX + 1) :
 
 ans = 0
 for g in range(1, MX + 1) :
-    # print(g/trace[g])
-    g_sq = trace[g] * math.isqrt(g//trace[g])
-    # print(g_sq, g)
-    for i in range(1, MX//g + 1) :
-        for j in range(1, (i * g)//g_sq + 1) :
-            for g1 in range(1, gcd(i * g, j * j * g_sq * g_sq) + 1) :
-                if ((j * j * g_sq * g_sq)//g) % g1 == 0 and i % g1 == 0 :
-                    ans += g * mu[g1] * pow(-1, j * g_sq)
+    for g1 in range(1, MX//g + 1) :
+        for i in range(1, MX + 1) :
+            if i % (g * g1) != 0 :
+                continue
+            for j in range(1, i + 1) :
+                if j % (math.isqrt((g * g1)//trace[g * g1]) * trace[g * g1]) != 0 :
+                    continue
+                ans += g * mu[g1] * pow(-1, j) 
 print(ans)
