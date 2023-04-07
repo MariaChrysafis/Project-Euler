@@ -43,15 +43,15 @@ ans = 0
 for g in range(1, MX + 1) :
     for g1 in range(1, MX//g + 1) :
         g_sq = math.isqrt((g * g1)//trace[g * g1]) * trace[g * g1]
-        for i in range(1, (MX)//(g * g1) + 1) :
+        right = MX//(g * g1)
+        if g_sq % 2 == 0 :
+            ans += g * mu[g1] * (right * (right + 1))//2 * (g * g1)//g_sq
+            continue
+        for i in range(1, right + 1) :
             ls = (i * g * g1)//g_sq
             if g_sq % 2 == 0 :
                 ans += g * mu[g1] * ls
-                continue
             else :
                 if ls % 2 == 1 :
                     ans -= g * mu[g1]
-                continue
-            for j in range(1, ls + 1) :
-                ans += g * mu[g1] * pow(-1, j * g_sq) 
 print(ans)
