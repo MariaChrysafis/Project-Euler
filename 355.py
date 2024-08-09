@@ -34,11 +34,9 @@ def is_prime (x : int) :
 g = nx.Graph()
 primes = []
 for i in range(1, n + 1) :
-    print(i)
     if is_prime(i) :
         primes.append(i)
 # print(primes)
-print("DONE")
 # primes.append(0)
 for x in primes :
     if x * x > n :
@@ -57,15 +55,7 @@ for node in g.nodes :
     if node * node <= n :
         l1.append(node)
 pos = nx.bipartite_layout(g, nodes=l1)
-# nx.draw(g, pos=pos, with_labels=True)
 labels = {e: g.edges[e]['weight'] for e in g.edges}
-# print(labels)
-# nx.draw_networkx_edge_labels(g, pos=pos, edge_labels=labels)
-# plt.savefig('plotgraph.png', dpi=300, bbox_inches='tight')
-# plt.show()
-# print(g.edges)
-print(len(g.edges))
-# print(nx.max_weight_matching(g))
 ans = 0
 for p in primes :
     ans += combo(p)[-1]
@@ -75,5 +65,4 @@ for e in nx.max_weight_matching(g) :
         ans += labels[(e[1], e[0])]
     else :
         ans += labels[e]
-    print(e)
 print(ans + 1)
