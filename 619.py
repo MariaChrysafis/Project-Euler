@@ -12,13 +12,6 @@ def smaller (x: list, y: list) :
     if len(x) > len(y) :
         return False
     return x < y
-def desquare (x: int) -> int :
-    for i in range(2, x + 1) :
-        if i * i > x :
-            return x
-        if x % (i * i) == 0 :
-            x //= (i * i)
-    return x
 
 def xor (s1: list, s2: list) :
     s = []
